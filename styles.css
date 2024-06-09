@@ -1,0 +1,138 @@
+@font-face {
+    font-family: 'Founders Grotesk';
+    src: url('fonts/FoundersGrotesk-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Founders Grotesk';
+    src: url('fonts/FoundersGrotesk-RegularItalic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Founders Grotesk Light';
+    src: url('fonts/FoundersGrotesk-Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Founders Grotesk', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items at the start of the flex container */
+    height: 100vh; /* Full viewport height */
+    padding-top: 20vh; /* Adjust this value to move the content up or down */
+    margin: 0;
+    line-height: 33.5px;
+    color: black;
+}
+
+.list-text {
+    font-size: 20px;
+}
+
+.container {
+    max-width: 450px; /* Set a max width for the container */
+    background-color: transparent;
+    border: none;
+
+    .form-check-input {
+        width: 14px;
+        height: 14px;
+        border-radius: 0; /* Remove rounding */
+        border: 2px solid #000; /* Optional: add border for better visibility */
+        cursor: pointer; /* Pointer cursor on hover */
+    }
+    
+    .list-group-item {
+        background-color: transparent; /* Make the list items background transparent */
+        border: none; /* Remove the border from the list items */
+        margin-bottom: -12px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+}
+
+/* For logic */
+li.checked {
+    text-decoration: line-through;
+    transition: opacity 0.7s ease-in-out;
+    opacity: 0;
+    font-style: italic
+}
+
+.checked {
+    text-decoration: line-through;
+    color: grey;
+}
+
+#add-task-btn:hover,
+#logo:hover,
+#switch:hover,
+#chevron:hover,
+#timer:hover {
+    cursor: pointer;
+}
+
+
+.task-name {
+    padding: 0; /* Remove any padding */
+    margin: 0; /* Remove any margin */
+}
+
+.task-name:focus {
+    outline: none;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+.dark-mode hr {
+    border-color: white;
+}
+
+.dark-mode .form-check-input {
+    border: 2px solid white;
+    background-color: black;
+}
+
+body.dark-mode .bi-chevron-down {
+    fill: #ffffff;
+    stroke: #ffffff;
+}
+
+.dark-mode .list-group-item,
+.dark-mode .add-task-text text {
+    color: white;
+}
+
+.dark-mode .task-name {
+    color: white;
+}
+
+.dark-mode .add-task-text {
+    color: white;
+}
+
+.chevron-up.move {
+    transform: translateY(80px) rotate(180deg); /* Move down by 5px */
+    transition: transform 0.5s;
+}
+
+.chevron-up {
+    transform: rotate(180deg);
+}
+
+#timer {
+    display: none;
+    font-size: 50px;
+    margin-top: 0px;
+    font-family: 'Founders Grotesk Light';
+}

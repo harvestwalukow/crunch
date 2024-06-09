@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUNCH</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <div class="container p-5">
+            <div class="list-text" style="margin-bottom: -25px;">
+                <ul class="list-group mb-0">
+                    <li class="list-group-item add-task-text">
+                        <text style="font-style: italic;">Add a new task to crunch...</text>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border-width: 2px; opacity:1">
+        <div class="position-relative" id="chevron-container" style="height: 100px; text-align: center;">
+            <div>
+                <svg id="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" class="bi bi-chevron-down" viewBox="0 0 16 16"> 
+                    <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                </svg>
+            </div>
+            <div id="timer">25:00</div>
+        </div>
+    </section>
+    <section>
+        <div class="position-absolute" style="bottom: 40px; right: 60px;">
+            <img src="images/CRUNCH.png" style="width: 120px; height: auto;" id="logo">
+            <img src="images/switch-mode.png" style="width: 60px; height: auto;" id="switch">
+        </div>
+        <div class="position-absolute" style="bottom: 37px; left: 60px;">
+            <img src="images/info-button.png" style="width: 22px; height: auto;" data-bs-toggle="tooltip" data-bs-placement="top" title="Click on the timer to start or switch to the next interval! Our method: 25 minutes of focus, 5-minute breaks. Feel free to time yourself with long breaks as needed." id="info-btn">
+            <img src="images/add-task.png" style="width: 82px; height: auto;" id="add-task-btn">
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Activate "Add Task" button functionality
+            var addTaskBtn = document.getElementById('add-task-btn');
+            var ul = document.querySelector('.list-group');
+            var addTaskText = document.querySelector('.add-task-text');
+    
+            addTaskBtn.addEventListener('click', function() {
+                var newTask = document.createElement('li');
+                newTask.classList.add('list-group-item');
+    
+                var checkbox = document.createElement('input');
+                checkbox.setAttribute('type', 'checkbox');
+                checkbox.classList.add('form-check-input', 'me-2', 'check-item');
+                checkbox.addEventListener('change', handleCheckboxChange);
+    
+                var span = document.createElement('span');
+                span.innerHTML = '&nbsp;';
+                span.classList.add('task-name');
+                span.setAttribute('contenteditable', 'true');
+                span.setAttribute('spellcheck', 'false');
+                span.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        span.blur();
+                    }
+                });
+                span.addEventListener('focus', function() {
+                    if (this.textContent === 'Type a task') {
+                        this.textContent = '';
+                    }
+                });
+                span.addEventListener('blur', function() {
+                    if (this.textContent === '') {
+                        this.textContent = 'Type a task';
+                    }
+                });
+    
+                newTask.appendChild(checkbox);
+                newTask.appendChild(span);
+                ul.insertBefore(newTask, addTaskText);
+                span.focus();
+                toggleAddTaskText();
+            });
+
+            // Create effect when the the checkboxes checked
+            function handleCheckboxChange() {
+                if (this.checked) {
+                    let li = this.parentElement;
+                    li.classList.add('checked');
+                    setTimeout(() => {
+                        li.style.display = 'none';
+                        toggleAddTaskText();
+                    }, 1000);
+                } else {
+                    let li = this.parentElement;
+                    li.classList.remove('checked');
+                }
+                toggleAddTaskText();
+            }
+    
+            function toggleAddTaskText() {
+                var checkboxes = document.querySelectorAll('.check-item');
+                var visibleCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.parentElement.style.display !== 'none');
+                if (visibleCheckboxes.length > 0) {
+                    addTaskText.style.display = 'none';
+                } else {
+                    addTaskText.style.display = 'block';
+                }
+            }
+    
+            toggleAddTaskText();
+            
+            // Go to about.html when logo clicked
+            var crunchImage = document.querySelector('img[src="images/CRUNCH.png"]');
+        
+            crunchImage.addEventListener('click', function() {
+                window.location.href = 'about.html';
+            });
+            
+            // Light/dark mode switcher
+            var switchBtn = document.getElementById('switch');
+        
+            switchBtn.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+
+                var isDarkMode = document.body.classList.contains('dark-mode');
+                document.getElementById('logo').src = isDarkMode ? 'images/CRUNCH-dark.png' : 'images/CRUNCH.png';
+                document.getElementById('switch').src = isDarkMode ? 'images/switch-mode-dark.png' : 'images/switch-mode.png';
+                document.getElementById('info-btn').src = isDarkMode ? 'images/info-button-dark.png' : 'images/info-button.png';
+                document.getElementById('add-task-btn').src = isDarkMode ? 'images/add-task-dark.png' : 'images/add-task.png';
+            });
+
+            // TIMER
+            var chevronContainer = document.getElementById('chevron-container');
+            var chevron = chevronContainer.querySelector('svg');
+            var timer = document.getElementById('timer');
+
+            chevron.addEventListener('click', function() {
+                chevron.classList.toggle('chevron-up');
+                chevron.classList.toggle('move'); 
+                if (chevron.classList.contains('chevron-up')) {
+                    setTimeout(function() {
+                        timer.style.display = 'block';
+                    }, 0);
+                } else {
+                    timer.style.display = 'none';
+                }
+            });
+
+            var timer = document.getElementById('timer');
+            var interval = 25 * 60; 
+            var countdown;
+
+            function startCountdown() {
+                clearInterval(countdown);
+                var timerValue = timer.textContent.split(':');
+                var minutes = parseInt(timerValue[0]);
+                var seconds = parseInt(timerValue[1]);
+
+                var totalSeconds = minutes * 60 + seconds;
+
+                countdown = setInterval(function () {
+                    totalSeconds--;
+
+                    if (totalSeconds <= 0) {
+                        clearInterval(countdown);
+                        interval = interval === 25 * 60 ? 5 * 60 : 25 * 60;
+                        updateTimerDisplay(interval);
+                        startCountdown();
+                    } else {
+                        var mins = Math.floor(totalSeconds / 60);
+                        var secs = totalSeconds % 60;
+                        timer.textContent = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+                    }
+                }, 1000);
+            }
+
+            function updateTimerDisplay(interval) {
+                var mins = Math.floor(interval / 60);
+                var secs = interval % 60;
+                timer.textContent = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+            }
+
+            function resetCountdown() {
+                clearInterval(countdown);
+                countdown = null;
+            }
+
+            timer.addEventListener('click', function () {
+                if (countdown) {
+                    resetCountdown();
+                    interval = interval === 25 * 60 ? 5 * 60 : 25 * 60;
+                    updateTimerDisplay(interval);
+                } else {
+                    startCountdown();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
