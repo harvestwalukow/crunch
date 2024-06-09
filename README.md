@@ -8,5 +8,5 @@ Welcome to Crunch, where productivity meets simplicity. Crunch is a suite of too
 
 ![alt text](images/image.png)
 
-1. Click the "Add Task" button to easily create a new task
+1. Click the "Add a Task" button to easily create a new task
 2. Once your tasks are listed, you can choose to use the Pomodoro timer by clicking the chevron and selecting the timer to begin, or simply proceed without it. The choice is yours!
