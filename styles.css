@@ -136,9 +136,3 @@ body.dark-mode .bi-chevron-down {
     margin-top: 0px;
     font-family: 'Founders Grotesk Light';
 }
-
-@media only screen and (max-width: 600px) {
-    .position-relative, .position-absolute {
-        display: none;
-    }
-}
