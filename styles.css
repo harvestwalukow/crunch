@@ -23,9 +23,9 @@ body {
     font-family: 'Founders Grotesk', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align items at the start of the flex container */
-    height: 100vh; /* Full viewport height */
-    padding-top: 20vh; /* Adjust this value to move the content up or down */
+    align-items: flex-start;
+    height: 100vh; 
+    padding-top: 20vh; 
     margin: 0;
     line-height: 33.5px;
     color: black;
@@ -36,21 +36,21 @@ body {
 }
 
 .container {
-    max-width: 450px; /* Set a max width for the container */
+    max-width: 450px; 
     background-color: transparent;
     border: none;
 
     .form-check-input {
         width: 14px;
         height: 14px;
-        border-radius: 0; /* Remove rounding */
-        border: 2px solid #000; /* Optional: add border for better visibility */
-        cursor: pointer; /* Pointer cursor on hover */
+        border-radius: 0; 
+        border: 2px solid #000; 
+        cursor: pointer; 
     }
     
     .list-group-item {
-        background-color: transparent; /* Make the list items background transparent */
-        border: none; /* Remove the border from the list items */
+        background-color: transparent; 
+        border: none; 
         margin-bottom: -12px;
         padding-top: 0px;
         padding-bottom: 0px;
@@ -80,8 +80,8 @@ li.checked {
 
 
 .task-name {
-    padding: 0; /* Remove any padding */
-    margin: 0; /* Remove any margin */
+    padding: 0;
+    margin: 0;
 }
 
 .task-name:focus {
@@ -122,7 +122,7 @@ body.dark-mode .bi-chevron-down {
 }
 
 .chevron-up.move {
-    transform: translateY(80px) rotate(180deg); /* Move down by 5px */
+    transform: translateY(80px) rotate(180deg);
     transition: transform 0.5s;
 }
 
@@ -135,4 +135,27 @@ body.dark-mode .bi-chevron-down {
     font-size: 50px;
     margin-top: 0px;
     font-family: 'Founders Grotesk Light';
+}
+
+@media only screen and (max-width: 600px) {
+
+    #add-task-btn {
+        width: 55px !important;
+        height: auto !important;
+    }
+
+    #logo {
+        width: 80px !important;
+        height: auto !important;
+    }
+
+    #switch {
+        width: 40px !important;
+        height: auto !important;
+    }
+
+    #info-btn {
+        width: 20px !important;
+        height: auto !important;
+    }
 }
